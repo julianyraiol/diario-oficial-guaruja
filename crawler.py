@@ -1,4 +1,6 @@
 import time
+import requests
+import logging
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -6,6 +8,7 @@ from selenium.webdriver.support.ui import Select, WebDriverWait
 from selenium.webdriver.common.keys import Keys
 
 delay = 2
+logging.basicConfig(level = logging.INFO)
 
 driver = webdriver.Firefox()
 driver.get("http://www.guaruja.sp.gov.br/edicoes-diario-oficial/")
@@ -22,14 +25,19 @@ select1 = Select(elementmonth)
 
 driver.execute_script("window.scrollBy(0, 400)")
 time.sleep(delay)
-calendar = driver.find_elements_by_class_name("mec-calendar-day") 
-#print(calendar)
-for days in calendar:
-    try:
-        days.click()
-    except: 
-        print('Não há eventos nesse dia')
+calendar = driver.find_elements_by_class_name("mec-color-hover") 
 
+for days in calendar:
+    try:    
+        filelink = days.get_attribute("href")
+        request_file = requests.get(filelink)
+        namefile = days.get_attribute('text').replace("/", "-") + ".pdf"
+        with open(namefile, "wb") as filepdf:
+            filepdf.write(request_file.content)
+        logging.info("Arquivo baixado")
+    except: 
+        logging.warning("Falha ao fazer download dos arquivos")
+        
 '''
 for year in years:
     select.select_by_value(year)
