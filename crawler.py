@@ -3,8 +3,6 @@ import time
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import ElementClickInterceptedException
 from selenium.webdriver.common.keys import Keys
 
 delay = 2
@@ -22,14 +20,26 @@ years = [x.get_attribute("value") for x in elementyears.find_elements_by_tag_nam
 select = Select(elementyears)
 select1 = Select(elementmonth)
 
+driver.execute_script("window.scrollBy(0, 400)")
+time.sleep(delay)
+calendar = driver.find_elements_by_class_name("mec-calendar-day") 
+#print(calendar)
+for days in calendar:
+    try:
+        days.click()
+    except: 
+        print('Não há eventos nesse dia')
+
+'''
 for year in years:
     select.select_by_value(year)
-
     for month in months:
-        time.sleep(delay)
         select1.select_by_visible_text(month)
+        time.sleep(delay)
+        #add codigo aqui
+    driver.execute_script("window.scrollBy(0, 0)")
     time.sleep(delay)
-
+'''
 driver.close()
 
 
