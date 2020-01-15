@@ -63,9 +63,10 @@ class GuarujaCrawler(object):
     
     def set_filter_by_month_year(self):
         selectyear = self.driver.get_element_by_id("mec_sf_year_22564")
-        selectmonth = self.driver.get_element_by_id("mec_sf_month_22564")
+        selectmonth = self.driver.get_element_by_id("mec_sf_year_22564")
 
-        years = self.driver.get_options_by_id(selectyear)
+        element = self.driver.get_element_by_id("mec_sf_year_22564")
+        years = self.driver.get_options_by_id(element)
 
         for year in years:
             self.driver.select_by_text(selectyear, year)
