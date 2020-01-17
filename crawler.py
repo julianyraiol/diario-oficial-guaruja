@@ -27,6 +27,7 @@ class GuarujaDriver(object):
         return [x.get_attribute("value") for x in element_id.options]
 
     def select_by_text(self, element, text):
+
         select = Select(element)
         select.select_by_visible_text(text)
         time.sleep(delay)
@@ -36,7 +37,8 @@ class GuarujaDriver(object):
         select.select_by_value(value)
 
     def go_to_calendar(self):
-        self.driver.execute_script("window.scrollBy(0, 400)")
+        print("Descendo pro calendário")
+        self.driver.execute_script("window.scrollTo(0, 400)")
 
 class GuarujaCrawler(object):
     def __init__(self):
@@ -58,7 +60,6 @@ class GuarujaCrawler(object):
         for days in calendar:
             filelink = days.get_attribute("href")
             filename = days.get_attribute('text').replace("/", "-") + ".pdf"
-
             self.download_and_save_file(filelink, filename)
     
     def set_filter_by_month_year(self):
@@ -75,7 +76,7 @@ class GuarujaCrawler(object):
                 print("Mês que tá sendo baixado:", month)
                 print("=================================")
                 self.driver.select_by_text(selectmonth, month)
-                self.get_files_by_day()                
+                self.get_files_by_day()          
                 self.driver.driver.execute_script("window.scrollTo(0, 0)")
       
 if __name__ == "__main__":
