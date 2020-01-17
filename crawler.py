@@ -1,7 +1,7 @@
 import time
 import requests
 import logging
-
+import os
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import Select, WebDriverWait
@@ -45,13 +45,17 @@ class GuarujaCrawler(object):
         self.driver = GuarujaDriver("http://www.guaruja.sp.gov.br/edicoes-diario-oficial/")
 
     def download_and_save_file(self, filelink, filename):
-        try:
-            requestlink = requests.get(filelink)
-            with open(filename, "wb") as f:
-                f.write(requestlink.content)
-            logging.info("Arquivo baixado: " + filename)
-        except:
-            logging.warning("Falha ao fazer download dos arquivos")
+
+        if (not os.path.exists(filename)):
+            try:
+                requestlink = requests.get(filelink)
+                with open(filename, "wb") as f:
+                    f.write(requestlink.content)
+                logging.info("Arquivo baixado: " + filename)
+            except:
+                logging.warning("Falha ao fazer download dos arquivos")
+        else:
+            logging.warning("Arquivo já existente")
 
     def get_files_by_day(self):
         calendar = self.driver.get_elements_by_class("mec-color-hover")
