@@ -10,11 +10,20 @@ delay = 6
 
 class GuarujaCrawler(object):
     def __init__(self):
+        """ Inicializa o webdriver com o navegador do Firefox.
+        """
+
         self.driver = webdriver.Firefox()
         self.driver.get("http://www.guaruja.sp.gov.br/edicoes-diario-oficial/")
         logging.basicConfig(level = logging.INFO)
 
     def download_and_save_file(self, filelink, filename):
+        """ Faz download do arquivo de diário oficial e salva o mesmo na pasta local do projeto.
+        
+        Arguments:
+            filelink {[string]} -- [Link do arquivo pdf a ser baixado]
+            filename {[string]} -- [Nome do arquivo a ser salvo; data do diário oficial.]
+        """
 
         if (not os.path.exists(filename)):
             try:
@@ -28,6 +37,9 @@ class GuarujaCrawler(object):
             logging.warning("Arquivo já existente")
 
     def get_files_by_day(self):
+        """ Coleta todos os elementos do calendário e chama o método download_and_save_file
+        """
+
         calendar = self.driver.find_elements_by_class_name("mec-color-hover")
         
         print("Descendo pro calendário")
@@ -39,6 +51,9 @@ class GuarujaCrawler(object):
             self.download_and_save_file(filelink, filename)
     
     def set_filter_by_month_year(self):
+        """ Realiza a ação de selecionar o mês e o ano no calendário de diários oficiais
+        """
+
         elementyear = self.driver.find_element_by_id("mec_sf_year_22564")
         elementmonth = self.driver.find_element_by_id("mec_sf_month_22564")
 
@@ -64,7 +79,6 @@ class GuarujaCrawler(object):
                 except:
                     self.driver.close()
                 
-      
 if __name__ == "__main__":
     crawler = GuarujaCrawler()
     crawler.set_filter_by_month_year()
