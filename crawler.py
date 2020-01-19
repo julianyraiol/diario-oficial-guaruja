@@ -55,12 +55,14 @@ class GuarujaCrawler(object):
                 print("=================================")
                 print("Mês que tá sendo baixado:", month)
                 print("=================================")
-                
-                selectmonth.select_by_visible_text(month)
-                time.sleep(delay)
-                
-                self.get_files_by_day()          
-                self.driver.execute_script("window.scrollTo(0, 0)")
+                try:
+                    selectmonth.select_by_visible_text(month)
+                    time.sleep(delay)
+
+                    self.get_files_by_day()          
+                    self.driver.execute_script("window.scrollTo(0, 0)")
+                except:
+                    self.driver.close()
                 
       
 if __name__ == "__main__":
