@@ -16,6 +16,10 @@ $ cd diario-oficial-guaruja
 $ pip install -r requirements.txt
 ```
 
+Também é necessário ter o Selenium em seu computador. Veja como baixar o driver do selenium para seu navegador [aqui](https://selenium-python.readthedocs.io/installation.html)
+
+Mova o executável para */usr/bin*.
+
 ### Executar
 
 No seu terminal, já tendo executado o arquivo de instalação, execute o seguinte comando:
