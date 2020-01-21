@@ -18,6 +18,8 @@ $ pip install -r requirements.txt
 
 Também é necessário ter o Selenium em seu computador. Veja como baixar o driver do selenium para seu navegador [aqui](https://selenium-python.readthedocs.io/installation.html)
 
+* Este projeto utiliza o driver do Firefox para executar as ações. 
+
 Mova o executável para */usr/bin*.
 
 ### Executar
