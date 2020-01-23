@@ -6,9 +6,9 @@ Fonte: [Diário Oficila de Guarujá](http://www.guaruja.sp.gov.br/edicoes-diario
 
 ### Instalação
 
-Este projeto requer **Python 3.+** e outras bibliotecas. Utilize uma [virtualenv](https://felipetoscano.com.br/ambientes-virtuais-em-python-com-pyenv-virtualenv-no-ubuntu/) para manter seu ambiente de desenvolvimento.
+Este projeto requer **Python 3.+** e outras bibliotecas. É aconselhado que se utilize uma [virtualenv](https://felipetoscano.com.br/ambientes-virtuais-em-python-com-pyenv-virtualenv-no-ubuntu/) para manter seu ambiente de desenvolvimento atualizado.
 
- Após isso, faça uso do arquivo **requirements.txt** para instalar as dependências
+ Após isso, faça uso do arquivo **requirements.txt** para instalar as dependências.
 
 ```bash
 $ git clone https://github.com/julianyraiol/diario-oficial-guaruja.git
